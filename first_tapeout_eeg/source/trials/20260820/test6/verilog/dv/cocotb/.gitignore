@@ -1,0 +1,5 @@
+sim/ 
+design_info.yaml
+*.log
+*.vcd 
+*.pyc

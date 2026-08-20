@@ -1,0 +1,5 @@
+﻿test_id,test_item,measured_value,unit,acceptance,status,evidence
+T6B-001,Closed-loop output common mode,0.899354945,V,0.81 to 0.99 V,PASS,results/cmfb_tt_op.csv
+T6B-002,Total supply current,3.68841099e-05,A,<=100 uA,PASS,results/cmfb_tt_op.csv
+T6B-003,Differential gain at 10 Hz,24.0456,dB,>=40 dB,FAIL,results/cmfb_tt_diff_ac.csv
+T6B-004,Differential gain at 100 Hz,24.0456,dB,>=40 dB,FAIL,results/cmfb_tt_diff_ac.csv

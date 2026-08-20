@@ -1,0 +1,7 @@
+﻿test_id,test_item,condition,measured_value,unit,acceptance,status,evidence
+T6-001,TT simulation completed,"Sky130A TT, 27 C, 1.8 V",1,boolean,all output files present,PASS,results/ota_tt_ngspice.log
+T6-002,Differential gain at 10 Hz,1 V differential AC,23.0371,dB,>=40 dB,FAIL,results/ota_tt_diff_ac.csv
+T6-003,Differential gain at 100 Hz,1 V differential AC,23.0371,dB,>=40 dB,FAIL,results/ota_tt_diff_ac.csv
+T6-004,Unity-gain frequency,1 pF per output,,Hz,>=10 kHz,NOT_RUN,results/ota_tt_diff_ac.csv
+T6-005,Common-mode voltage gain at 10 Hz,both inputs driven in phase,-3.57996,dB,informational,INFO,results/ota_tt_cm_ac.csv
+T6-006,Gain rejection estimate at 10 Hz,differential gain - common-mode voltage gain,26.61706,dB,>=80 dB,FAIL,calculated from T6-002/T6-005; mismatch CMRR remains separate

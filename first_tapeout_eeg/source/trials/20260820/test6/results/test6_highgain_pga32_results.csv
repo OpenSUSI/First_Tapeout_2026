@@ -1,0 +1,11 @@
+test_id,corner,vdd_v,temp_c,metric,value,unit,acceptance,result
+T6-HG-001,TT,1.8,27,output_common_mode,0.897443,V,0.81_to_0.99,PASS
+T6-HG-002,TT,1.8,27,total_supply_current,82.741,uA,le_100,PASS
+T6-HG-003,TT,1.8,27,open_loop_gain_10hz,89.4025,dB,ge_55,PASS
+T6-HG-004,TT,1.8,27,open_loop_gain_100hz,88.6177,dB,ge_55,PASS
+T6-HG-005,TT,1.8,27,gain32_loop_crossover,208.0,kHz,gt_10k,PASS
+T6-HG-006,TT,1.8,27,gain32_phase_margin,75.4,deg,ge_60,PASS
+T6-PGA-001,TT,1.8,27,closed_loop_gain_10hz,31.944,V_per_V,31.68_to_32.32,PASS
+T6-PGA-002,TT,1.8,27,closed_loop_gain_100hz,31.944,V_per_V,31.68_to_32.32,PASS
+T6-PGA-003,TT,1.8,27,closed_loop_gain_error,0.175,percent,le_1,PASS
+T6-PGA-004,TT,1.8,27,closed_loop_3db_bandwidth,234.4,kHz,gt_1k,PASS

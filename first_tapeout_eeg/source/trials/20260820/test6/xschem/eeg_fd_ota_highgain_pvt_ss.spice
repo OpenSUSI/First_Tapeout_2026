@@ -1,0 +1,5 @@
+* SS, low supply, hot
+.lib /foss/pdks/sky130A/libs.tech/ngspice/sky130.lib.spice ss
+.param VDD=1.62 VCM=0.81 VBN=0.63
+.temp 125
+.include eeg_fd_ota_highgain_pvt_body.inc

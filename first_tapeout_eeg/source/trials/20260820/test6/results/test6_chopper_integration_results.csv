@@ -1,0 +1,6 @@
+variant,description,input_pp_uV,output_or_raw_pp_uV,effective_or_sync_gain,vcm_pp_V,current_uA,result,reason
+A,analog_input_and_output_chopper_5p,100,423.293,4.233,2.964,61.423,FAIL,CMFB_kickback
+B,analog_input_and_output_chopper_100p,100,169.057,1.691,2.013,90.916,FAIL,load_does_not_fix_kickback
+C,ideal_output_isolation_buffer_5p,100,678.423,6.784,3.107,55.660,FAIL,input_kickback_remains
+D,small_switches_5p_input_hold,100,284.247,2.842,3.080,56.092,FAIL,input_kickback_remains
+E,input_chopper_static_PGA_digital_demod,100,7542.28,0.534,3.021,62.320,FAIL,synchronous_signal_gain_lost

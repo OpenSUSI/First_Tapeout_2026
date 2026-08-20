@@ -1,0 +1,11 @@
+test_id,condition,metric,value,unit,limit,result,verification
+T6-NOISE-001,TT_1p8V_27C_unchopped,input_noise_0p5_100Hz,2.6475,uVrms,le_1p0,FAIL,transistor_noise
+T6-NOISE-002,TT_1p8V_27C_unchopped,input_noise_0p5_250Hz,2.9501,uVrms,le_1p5,FAIL,transistor_noise
+T6-NOISE-003,TT_1p8V_27C_unchopped,density_0p5Hz,1416.48,nV_per_sqrtHz,informational,INFO,transistor_noise
+T6-NOISE-004,TT_1p8V_27C_unchopped,density_1Hz,1034.47,nV_per_sqrtHz,informational,INFO,transistor_noise
+T6-NOISE-005,TT_1p8V_27C_unchopped,density_10Hz,366.93,nV_per_sqrtHz,informational,INFO,transistor_noise
+T6-NOISE-006,TT_1p8V_27C_unchopped,density_100Hz,132.59,nV_per_sqrtHz,informational,INFO,transistor_noise
+T6-NOISE-007,TT_1p8V_27C_unchopped,density_4kHz,30.05,nV_per_sqrtHz,informational,INFO,transistor_noise
+T6-NOISE-008,TT_1p8V_27C_unchopped,density_8kHz,24.29,nV_per_sqrtHz,informational,INFO,transistor_noise
+T6-NOISE-009,ideal_chopper_8kHz,estimated_input_noise_0p5_100Hz,0.34,uVrms,le_1p0,EST_PASS,analytical_estimate
+T6-NOISE-010,ideal_chopper_8kHz,estimated_input_noise_0p5_250Hz,0.54,uVrms,le_1p5,EST_PASS,analytical_estimate

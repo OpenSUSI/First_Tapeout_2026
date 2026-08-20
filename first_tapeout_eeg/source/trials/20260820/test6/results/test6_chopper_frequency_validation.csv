@@ -1,0 +1,4 @@
+candidate_kHz,divider_from_256k,ratio_to_250Hz,ota_gain_dB,noise_density_nVrtHz,estimated_noise_0p5_100Hz_uVrms,estimated_noise_0p5_250Hz_uVrms,relative_switching_activity,decision
+4,64,16,64.38,30.05,0.424,0.671,1.0,REJECT_LOW_SEPARATION
+8,32,32,58.39,24.29,0.343,0.543,2.0,SELECTED
+16,16,64,52.39,20.45,0.289,0.457,4.0,REJECT_SMALL_NOISE_BENEFIT

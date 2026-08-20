@@ -1,0 +1,5 @@
+* TT nominal
+.lib /foss/pdks/sky130A/libs.tech/ngspice/sky130.lib.spice tt
+.param VDD=1.8 VCM=0.9 VBN=0.63
+.temp 27
+.include eeg_fd_ota_highgain_pvt_body.inc

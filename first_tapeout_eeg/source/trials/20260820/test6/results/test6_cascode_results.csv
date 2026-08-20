@@ -1,0 +1,6 @@
+﻿test_id,topology,test_item,measured_value,unit,acceptance,status
+T6C-001,telescopic cascode,output common mode,0.899996016,V,0.81 to 0.99,PASS
+T6C-002,telescopic cascode,supply current,1.78058578e-05,A,<=100e-6,PASS
+T6C-003,telescopic cascode,gain at 10 Hz,-29.0828,dB,>=40,FAIL
+T6C-004,telescopic cascode,gain at 100 Hz,-29.0828,dB,>=40,FAIL
+T6C-005,telescopic cascode,gain at 10 kHz,-29.0829,dB,informational,INFO

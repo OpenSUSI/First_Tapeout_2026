@@ -1,0 +1,10 @@
+test,nominal,pass_limit,priority
+Input-referred noise (0.5-100 Hz),0.7 uVrms,<=1.0 uVrms,P0
+CMRR at 50/60 Hz,90 dB,>=80 dB PVT / >=70 dB MC,P0
+Differential loop phase margin,65 deg,>=60 deg,P0
+CMFB loop phase margin,65 deg,>=60 deg,P0
+Electrode offset tolerance,+/-300 mV,no persistent saturation,P0
+Gain error,0 %,<=5 %,P1
+Input impedance at 10 Hz,1 Gohm,>=100 Mohm,P1
+PSRR at 50/60 Hz,80 dB,>=70 dB,P1
+Overload recovery,0.5 s,<=1 s,P1
