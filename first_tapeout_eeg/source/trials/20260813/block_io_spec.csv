@@ -1,0 +1,9 @@
+block,input,output,domain,note
+Xtal/PLL,crystal resonance / reference oscillator,"mod_clk=16000 Hz, spi_clk=1000000 Hz",clock,low-jitter source for converter and serial timing
+PrecisionVoltage,analog supply,stable reference/bias rails,power/reference,ADC full scale reference = ±50.0 mV
+Diff-In + Filter,electrode Vpos/Vneg + common-mode/noise,band-limited differential analog,analog,bandpass ~0.5-30.0 Hz
+MUX,8 differential channels,selected differential channel ch0,analog,short routing for multi-channel integration
+DiffAmp (PGA),selected differential analog,gain-scaled analog,analog,gain=1000.0x
+SD-ADC + Decimation,PGA analog output,digital samples @250 Hz,mixed-signal,"1-bit modulator @16000 Hz, OSR=64"
+FIFO Unit,ADC sample words,buffered sample frames,digital,absorbs burst/jitter mismatch between ADC and SPI
+SPI,FIFO frames,serial data stream,digital I/O,"frame_bits=24, required_rate=6000 bps"

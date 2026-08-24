@@ -1,0 +1,8 @@
+test_id,corner,fch_kHz,deadtime_us,metric,value,unit,acceptance,result
+T6-CHOP-001,TT,8,2.5,input_differential_pp,2.000,mVpp,stimulus,INFO
+T6-CHOP-002,TT,8,2.5,chopped_internal_pp,2.4665,mVpp,switching_visible,PASS
+T6-CHOP-003,TT,8,2.5,demodulated_output_pp,64.0697,mVpp,63p36_to_64p64,PASS
+T6-CHOP-004,TT,8,2.5,effective_gain,32.03485,V_per_V,31p68_to_32p32,PASS
+T6-CHOP-005,TT,8,2.5,gain_error,0.109,percent,abs_le_1,PASS
+T6-CHOP-006,TT,8,2.5,output_switching_error_rms,8.321,uVrms,informational,INFO
+T6-CHOP-007,TT,8,2.5,input_referred_switching_error_rms,0.260,uVrms,lt_1,PASS

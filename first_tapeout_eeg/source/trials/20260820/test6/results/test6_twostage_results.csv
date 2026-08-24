@@ -1,0 +1,9 @@
+test_id,corner,vdd_v,temp_c,metric,value,unit,acceptance,result
+T6-2STG-001,TT,1.8,27,output_common_mode,0.897755,V,0.81_to_0.99,PASS
+T6-2STG-002,TT,1.8,27,total_supply_current,72.216,uA,le_100,PASS
+T6-2STG-003,TT,1.8,27,differential_gain_10hz,41.7075,dB,ge_40,PASS
+T6-2STG-004,TT,1.8,27,differential_gain_100hz,41.7075,dB,ge_40,PASS
+T6-2STG-005,TT,1.8,27,gain32_loop_crossover,112.2,kHz,gt_10k,PASS
+T6-2STG-006,TT,1.8,27,gain32_phase_margin,98.3,deg,ge_60,PASS
+T6-2STG-007,TT,1.8,27,unity_gain_frequency,10.33,MHz,informational,INFO
+T6-2STG-008,TT,1.8,27,unity_gain_stability,0,boolean,required_only_for_unity_buffer,FAIL

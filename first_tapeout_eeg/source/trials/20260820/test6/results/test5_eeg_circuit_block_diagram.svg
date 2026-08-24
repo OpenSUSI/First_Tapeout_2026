@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+<rect width="1600" height="900" fill="#ffffff"/>
+<style>
+.title{font:700 40px 'Yu Gothic','Meiryo',sans-serif;fill:#163e78}.sub{font:24px 'Yu Gothic','Meiryo',sans-serif;fill:#555}.h{font:700 22px 'Yu Gothic','Meiryo',sans-serif;fill:#163e78}.t{font:19px 'Yu Gothic','Meiryo',sans-serif;fill:#222}.io{font:700 18px 'Yu Gothic','Meiryo',sans-serif;fill:#143963}.small{font:16px 'Yu Gothic','Meiryo',sans-serif;fill:#555}.blk{fill:#eef4fa;stroke:#3769a5;stroke-width:3}.analog{stroke:#23898b;stroke-width:5;fill:none}.digital{stroke:#7b579b;stroke-width:4;fill:none}.power{stroke:#cf7831;stroke-width:3;fill:none}.dash{stroke:#8b8b8b;stroke-width:2;stroke-dasharray:9 7;fill:none}
+</style>
+<defs><marker id="a" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#23898b"/></marker><marker id="d" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0,0 L10,4 L0,8 z" fill="#7b579b"/></marker></defs>
+<text x="70" y="70" class="title">EEG専用アナログ・フロントエンド／ΣΔ ADC 構成</text>
+<text x="70" y="108" class="sub">完全差動信号経路とCaravel RISC-V制御（test5設計入力）</text>
+<text x="65" y="175" class="h">アナログ入力</text><text x="1360" y="175" class="h">デジタル出力</text>
+<rect x="250" y="235" width="220" height="170" rx="8" class="blk"/><text x="360" y="285" text-anchor="middle" class="h">入力保護／MUX</text><text x="360" y="325" text-anchor="middle" class="t">AC結合 + Chopper</text><text x="360" y="360" text-anchor="middle" class="small">対称ESD・テスト入力</text>
+<rect x="535" y="235" width="220" height="170" rx="8" class="blk"/><text x="645" y="285" text-anchor="middle" class="h">完全差動OTA</text><text x="645" y="325" text-anchor="middle" class="t">CMFB + DC Servo</text><text x="645" y="360" text-anchor="middle" class="small">低雑音Chopper IA</text>
+<rect x="820" y="235" width="190" height="170" rx="8" class="blk"/><text x="915" y="285" text-anchor="middle" class="h">容量比PGA</text><text x="915" y="325" text-anchor="middle" class="t">×8/16/32/64</text><text x="915" y="360" text-anchor="middle" class="small">推奨：×32</text>
+<rect x="1075" y="235" width="190" height="170" rx="8" class="blk"/><text x="1170" y="285" text-anchor="middle" class="h">2次 ΣΔ</text><text x="1170" y="325" text-anchor="middle" class="t">1-bit Modulator</text><text x="1170" y="360" text-anchor="middle" class="small">256 kHz / OSR 1024</text>
+<rect x="1330" y="235" width="200" height="170" rx="8" class="blk"/><text x="1430" y="285" text-anchor="middle" class="h">CIC + FIR</text><text x="1430" y="325" text-anchor="middle" class="t">24-bit FIFO</text><text x="1430" y="360" text-anchor="middle" class="small">250 SPS</text>
+<path d="M470 320 H535" class="analog" marker-end="url(#a)"/><path d="M755 320 H820" class="analog" marker-end="url(#a)"/><path d="M1010 320 H1075" class="analog" marker-end="url(#a)"/><path d="M1265 320 H1330" class="digital" marker-end="url(#d)"/>
+<text x="70" y="267" class="io">EEG_INP</text><text x="70" y="317" class="io">EEG_INN</text><path d="M165 260 H250" class="analog" marker-end="url(#a)"/><path d="M165 310 H250" class="analog" marker-end="url(#a)"/>
+<text x="70" y="382" class="io">BIAS電極</text><path d="M170 375 H250" class="power"/>
+<text x="535" y="195" class="small">VCM=0.9 V / VBN / VBP</text><path d="M645 205 V235" class="power"/>
+<text x="250" y="445" class="small">PHI1 / PHI2（非重複）</text><path d="M360 420 V405" class="digital"/>
+<text x="820" y="445" class="small">GAIN_SEL[1:0]</text><path d="M915 420 V405" class="digital"/>
+<text x="1370" y="448" class="io">ADC_DATA[23:0]</text><text x="1370" y="478" class="io">DATA_VALID / IRQ</text>
+<rect x="580" y="555" width="430" height="155" rx="8" class="blk"/><text x="795" y="605" text-anchor="middle" class="h">Caravel Management SoC / RISC-V</text><text x="795" y="646" text-anchor="middle" class="t">Wishbone設定・FIFO読出し・SPI/UART通信</text><text x="795" y="680" text-anchor="middle" class="small">user_clock2 / reset / gain / servo / test control</text>
+<path d="M795 555 V485 H360 V405" class="digital" marker-end="url(#d)"/><path d="M830 555 V485 H915 V405" class="digital" marker-end="url(#d)"/><path d="M900 555 V500 H1430 V405" class="digital" marker-end="url(#d)"/>
+<text x="1040" y="620" class="io">SPI_SCLK / MOSI / MISO / CS_N</text><path d="M1010 635 H1320" class="digital" marker-end="url(#d)"/>
+<rect x="70" y="765" width="1460" height="78" rx="4" fill="#f6f6f6" stroke="#bbb"/><text x="95" y="798" class="small">電源：VDDA 1.8 V（AFE/ADC）／VSSA、VCCD 1.8 V（デジタル）／VSSD　　外部・試験端子：EEG_INP/N、BIAS、VCM/REF、TEST_P/N</text><text x="95" y="828" class="small">注意：17.5 ENOB、0.0389 µVrms、40.07 dBはアーキテクチャ推定。Sky130 PVT・雑音・CMFB安定性・Monte Carloは未実行。</text>
+</svg>

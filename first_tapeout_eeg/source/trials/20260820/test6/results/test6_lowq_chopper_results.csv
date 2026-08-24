@@ -1,0 +1,10 @@
+test_id,configuration,metric,value,unit,result
+T6-LQ-001,isolated_baseline_100ns,active_diff_error,88.171,uVrms,REFERENCE
+T6-LQ-002,isolated_lowq_100ns,active_diff_error,81.223,uVrms,IMPROVED
+T6-LQ-003,isolated_baseline_100ns,active_vcm_error,16.247,uVrms,REFERENCE
+T6-LQ-004,isolated_lowq_100ns,active_vcm_error,11.020,uVrms,IMPROVED
+T6-LQ-005,isolated_lowq_blank_1us,diff_error,0.083,uVrms,PASS
+T6-LQ-006,lowq_input_static_pga,digital_sync_gain,0.599,V_per_V,FAIL
+T6-LQ-007,lowq_input_static_pga,output_vcm_pp,3.006,Vpp,FAIL
+T6-LQ-008,ideal_modulator_static_pga,demodulated_gain,0.997,V_per_V,FAIL
+T6-LQ-009,ideal_modulator_static_pga,output_vcm_pp,2.996,Vpp,FAIL

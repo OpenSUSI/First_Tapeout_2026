@@ -1,0 +1,33 @@
+v {xschem version=3.4.5 file_version=1.2}
+K {type=subcircuit
+format="@name @pinlist @symname"
+template="name=X1"
+}
+G {}
+V {}
+S {}
+E {}
+T {eeg_dc_servo} 0 -10 0 0 0.4 0.4 {hcenter=true}
+T {offset integrator, selectable corner} 0 20 0 0 0.22 0.22 {hcenter=true}
+B 5 -90 -60 90 60 {name=BODY}
+B 5 -112 -37 -108 -33 {name=INP dir=inout}
+L 4 -110 -35 -90 -35 {}
+T {INP} -102 -40 0 0 0.18 0.18 {hcenter=false}
+B 5 -112 -12 -108 -8 {name=INN dir=inout}
+L 4 -110 -10 -90 -10 {}
+T {INN} -102 -15 0 0 0.18 0.18 {hcenter=false}
+B 5 -112 23 -108 27 {name=EN dir=inout}
+L 4 -110 25 -90 25 {}
+T {EN} -102 20 0 0 0.18 0.18 {hcenter=false}
+B 5 108 -27 112 -23 {name=FBP dir=inout}
+L 4 110 -25 90 -25 {}
+T {FBP} 102 -30 0 0 0.18 0.18 {hcenter=true}
+B 5 108 8 112 12 {name=FBN dir=inout}
+L 4 110 10 90 10 {}
+T {FBN} 102 5 0 0 0.18 0.18 {hcenter=true}
+B 5 108 33 112 37 {name=VDD dir=inout}
+L 4 110 35 90 35 {}
+T {VDD} 102 30 0 0 0.18 0.18 {hcenter=true}
+B 5 108 48 112 52 {name=VSS dir=inout}
+L 4 110 50 90 50 {}
+T {VSS} 102 45 0 0 0.18 0.18 {hcenter=true}
