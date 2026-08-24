@@ -138,15 +138,17 @@ def readdata(f_name, start, num_sample):
 class Doppler(object):
     def __init__(self, initial_doppler):
         self.doppler_nco_omega = initial_doppler
+        self.initial_doppler = initial_doppler
         self.doppler_nco_accumlator = 0
         self.i_integral = 0
         self.q_integral = 0
         self.prev_i_integral = 0
         self.prev_q_integral = 0
         self.integral = 0
-        self.Ci = 0.00 # T=10ms
-        self.Cp = 0.5 # T=10ms
-        self.lf_coef_fll = -0.5
+        self.Ci = 0.0 # T=10ms
+        self.Cp = 1.0# T=10ms
+        self.lf_coef_fll = -0.05
+        self.lf_coef_pll = 0.001
 
     def cancel_doppler(self, i, q):
         carrier_i = np.cos(self.doppler_nco_accumlator)
@@ -162,13 +164,20 @@ class Doppler(object):
         self.i_integral += i_corr
         self.q_integral += q_corr
 
-    def update_parameter(self):
-        fll_error = self.fll_discriminator(self.i_integral, self.q_integral)
-        fll_adjust = self.loopfilter(fll_error/(2.0*np.pi*coherent_time))
-        if np.abs(fll_error) > np.pi/4:
-            return (fll_error, 0.0)
-        self.doppler_nco_omega += fll_adjust * self.lf_coef_fll
-        return (fll_error, fll_adjust)
+    def update_parameter(self, pll = False):
+        if pll is False:
+            fll_error = self.fll_discriminator(self.i_integral, self.q_integral)
+            fll_adjust = self.loopfilter(fll_error/(2.0*np.pi*coherent_time))
+            if np.abs(fll_error) > np.pi/4:
+                return (fll_error, 0.0)
+            self.doppler_nco_omega += fll_adjust * self.lf_coef_fll
+            return (fll_error, fll_adjust*self.lf_coef_fll)
+        else:
+            pll_error = self.costas_discriminator(self.i_integral, self.q_integral)
+            pll_adjust = self.loopfilter(pll_error)
+            print("COSTAS: {}".format(pll_error))
+            self.doppler_nco_omega = self.initial_doppler + pll_adjust * self.lf_coef_pll
+            return (pll_error, pll_adjust)
 
     def loopfilter(self, error):
         self.integral += error * self.Ci
@@ -214,7 +223,7 @@ class Code(object):
         self.Ci = 0#0.001556 # T=5ms
         self.Cp = 3.77123  # T=5ms
         self.integral = 0
-        self.lf_coef = +1
+        self.lf_coef = +0.5
 
     def correlate_epl(self, i_mixed, q_mixed):
         code_phase_prompt_index = int(self.code_nco_accumlator)
@@ -258,16 +267,12 @@ class Code(object):
         ip = self.i_integral_prompt * self.i_integral_prompt
         qp = self.q_integral_prompt * self.q_integral_prompt
         
-        #return ((self.i_integral_early - self.i_integral_late)*self.i_integral_prompt + (self.q_integral_early - self.q_integral_late)*self.q_integral_prompt)/4.0
         psum = pe + pl
         if psum < 1e-12:
             return 0.0
 
         dnorm = (pe - pl)/psum/4/num_coherent_data_sample
         return dnorm
-
-        #code_error = ((self.i_integral_early - self.i_integral_late)*self.i_integral_prompt + (self.q_integral_early - self.q_integral_late)*self.q_integral_prompt)/2
-        #return code_error
 
     def clear_accumulator(self):
         self.i_integral_prompt = 0
@@ -392,10 +397,10 @@ class DataStore(object):
         ax2.plot(self.code_nco[:self.num_code, 0]/fb, self.code_nco[:self.num_code, 1])
         ax2.set_title('Code NCO')
 
-        ax3.plot(self.code_error[:self.num_code, 0]/fb, self.code_error[:self.num_code, 1])
-        ax3.set_title('Code NCO discriminator')
+        ax3.plot(self.corr_prompt[:self.num_code, 0]/fb, self.corr_prompt[:self.num_code, 1])
+        ax3.set_title('Correlator')
 
-        ax4.plot(self.doppler_nco[:self.num_doppler, 0]/fb, self.doppler_nco[:self.num_doppler, 1]%1)
+        ax4.plot(self.doppler_nco[:self.num_doppler, 0]/fb, self.doppler_nco[:self.num_doppler, 1])
         ax4.set_title('Doppler NCO')
 
         ax5.plot(self.doppler_error[:self.num_doppler, 0]/fb, self.doppler_error[:self.num_doppler, 1])
@@ -404,22 +409,24 @@ class DataStore(object):
         #ax5.plot(self.corr_late[:self.num_code, 0]/fb, self.corr_late[:self.num_code, 1])
         #ax5.set_title('Corr. PE(blue), PL(red)')
 
-        ax_2_1.plot(self.i[:self.num_doppler, 1], self.q[:self.num_doppler, 1], '.')
+        ax_2_1.scatter(self.i[:self.num_doppler, 1], self.q[:self.num_doppler, 1], c=self.i[:self.num_doppler, 0], cmap='Wistia', alpha=0.6, edgecolors='none')
         ax_2_1.set_xlim((-3000*self.graph, 3000*self.graph))
         ax_2_1.set_ylim((-3000*self.graph, 3000*self.graph))
         ax_2_1.set_title("Prompt Correlator Output")
+        ax_2_1.set_xlabel("I")
+        ax_2_1.set_ylabel("Q")
 
 
         fig.tight_layout()
         plt.show()
 
-LOAD_LENGTH = int(fs*5000e-3)
+LOAD_LENGTH = int(fs*3000e-3)
 TOTAL_LENGTH = int(fs*2000e-3)
 #TOTAL_SAMPLES = TOTAL_LENGTH//4
 
 samples, i, q = readdata(FILE, 0, LOAD_LENGTH)
 
-initial_doppler = 2000 
+initial_doppler = 2000
 initial_code_delay = 339
 
 doppler = Doppler(initial_doppler)
@@ -433,6 +440,10 @@ code_adjust = 0
 doppler_error = 0
 doppler_adjust = 0
 
+fll_lock_count = 0
+fll_threshould = 10
+pll = False
+
 for n in range(samples):
     i_mixed, q_mixed = doppler.cancel_doppler(i[n], q[n])
     i_corr, q_corr = code.correlate_epl(i_mixed, q_mixed)
@@ -440,9 +451,24 @@ for n in range(samples):
 
     if (n+1) % (num_coherent_data_sample*dop_length) == 0:
         print("Update: {}".format(n))
-        (doppler_error, doppler_adjust) = doppler.update_parameter()
+        print("Mode PLL: {}".format(pll))
+        print("FLL lock count: {}".format(fll_lock_count))
+        (doppler_error, doppler_adjust) = doppler.update_parameter(pll)
         datastore.store_doppler(doppler, doppler_error, doppler_adjust, n)
         doppler.clear_accumulator()
+
+        if np.abs(doppler_adjust) < fll_threshould:
+            fll_lock_count += 1
+        else:
+            fll_lock_count = 0
+
+        if fll_lock_count > 100:
+            pll = True
+            doppler.initial_doppler = doppler.doppler_nco_omega
+            doppler.Ci = 0.1
+            doppler.Cp = 3
+
+
 
     if (n+1) % (num_coherent_data_sample*1) == 0:
         print("Update: {}".format(n))
